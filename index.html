@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My App</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        button {
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        pre {
+            text-align: left;
+            background: #f4f4f4;
+            padding: 15px;
+            border-radius: 8px;
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Frontend Application</h1>
+
+    <button onclick="loadData()">Get Data From Backend</button>
+
+    <h3>Response:</h3>
+    <pre id="result">Waiting...</pre>
+
+    <script>
+        async function loadData() {
+            try {
+                const response = await fetch('/api/health');
+                const data = await response.json();
+
+                document.getElementById('result').textContent =
+                    JSON.stringify(data, null, 2);
+
+            } catch (error) {
+                document.getElementById('result').textContent =
+                    'Error: ' + error.message;
+            }
+        }
+    </script>
+
+</body>
+</html>
